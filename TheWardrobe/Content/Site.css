@@ -114,6 +114,8 @@
 
 body {
     padding-bottom: 20px;
+    box-sizing: border-box;
+    font-family: "Inter", Arial, "Helvetica Neue", "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -137,3 +139,20 @@ body {
     position: relative;
     top: 1px;
 }
+
+.card-product-grid {
+    box-shadow: 0 4px 15px rgba(153, 153, 153, 0);
+    transition: all 0.5s;
+}
+
+    .card-product-grid:hover {
+        box-shadow: 0 10px 15px rgba(153, 153, 153, 0.5);
+    }
+
+.fa-star {
+    color: #ccc;
+}
+
+    .fa-star.active {
+        color: orange;
+    }
