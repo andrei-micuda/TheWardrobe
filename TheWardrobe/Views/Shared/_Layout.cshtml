@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark mb-5">
         <a class="navbar-brand d-flex align-items-center" href="#" style="font-family: 'PT Mono'">
             <img class="mr-2" src="~/Content/logo.png" height="50px" width="50px" alt="Logo" />
             TheWardrobe
@@ -34,8 +35,6 @@
                         <span>Categories</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Manage categories</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Tshirts</a>
                         <a class="dropdown-item" href="#">Pants</a>
                         <a class="dropdown-item" href="#">Accessories</a>
@@ -58,6 +57,9 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Manage account</a>
+                        <a class="dropdown-item" href="#">Manage categories</a>
+                        <a class="dropdown-item" href="#">Manage products</a>
+                        <a class="dropdown-item" href="#">Manage user roles</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Logout</a>
                     </div>
@@ -84,7 +86,6 @@
                     <div class="dropdown-menu" aria-labelledby="cartDropdownButton">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
             </ul>
