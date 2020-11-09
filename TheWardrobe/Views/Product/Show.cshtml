@@ -28,7 +28,7 @@
     </aside>
     <main class="col-md-6 border-left">
         <article class="content-body">
-
+            <span class="text-muted">@ViewBag.Product.Category.CategoryName</span>
             <h2 class="title">
                 @ViewBag.Product.ProductName
                 @if ((DateTime.Now - ViewBag.Product.DateAdded).TotalHours <= 24)
