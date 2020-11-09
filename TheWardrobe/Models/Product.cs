@@ -18,6 +18,9 @@ namespace TheWardrobe.Models
         public decimal Price { get; set; }
 
         [Required]
+        public string Size { get; set; }
+
+        [Required]
         public bool IsApproved { get; set; }
 
         public string Description { get; set; }

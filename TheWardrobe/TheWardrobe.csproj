@@ -195,6 +195,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\OrderItem\" />

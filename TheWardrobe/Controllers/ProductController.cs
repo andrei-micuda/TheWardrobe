@@ -20,5 +20,12 @@ namespace TheWardrobe.Controllers
             ViewBag.Products = products;
             return View();
         }
+
+        public ActionResult Show(int productId)
+        {
+            var product = db.Products.Find(productId);
+            ViewBag.Product = product;
+            return View();
+        }
     }
 }
