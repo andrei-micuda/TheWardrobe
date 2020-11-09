@@ -53,5 +53,10 @@ namespace TheWardrobe.Controllers
             ViewBag.Product = product;
             return View();
         }
+
+        public ActionResult New()
+        {
+            return View();
+        }
     }
 }

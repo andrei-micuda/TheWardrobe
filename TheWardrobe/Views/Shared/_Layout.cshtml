@@ -104,5 +104,10 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            $("input[type='number']").inputSpinner();
+        });
+    </script>
 </body>
 </html>
