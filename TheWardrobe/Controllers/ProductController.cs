@@ -54,9 +54,42 @@ namespace TheWardrobe.Controllers
             return View();
         }
 
+        [NonAction]
+        public IEnumerable<SelectListItem> GetCategorySelectList()
+        {
+            var selectList = new List<SelectListItem>();
+            var categories = from cat in db.Categories
+                             select cat;
+
+            foreach (var cat in categories)
+            {
+                selectList.Add(new SelectListItem
+                {
+                    Value = cat.CategoryId.ToString(),
+                    Text = cat.CategoryName
+                });
+            }
+
+            return selectList;
+        }
+
         public ActionResult New()
         {
-            return View();
+            var product = new Product();
+            var categories = from cat in db.Categories
+                             select cat;
+            ViewBag.Categories = categories;
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult New(Product productToAdd)
+        {
+            productToAdd.DateAdded = DateTime.Now;
+            productToAdd.IsApproved = false;
+            db.Products.Add(productToAdd);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

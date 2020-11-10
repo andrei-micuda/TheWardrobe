@@ -14,13 +14,13 @@
                         {
                             <span class="badge badge-success position-absolute" style="top: 10px; left: 10px;"> NEW </span>
                         }
-                        <img class="card-img-top" src="@products[i].ImageUrl" alt="Card image cap">
+                        <img class="card-img-top" src=@(products[i].ImageUrl ?? "/Content/product-placeholder.png") alt="Card image cap">
                         <div class="card-body py-3 px-4">
                             <h5 class="card-title mb-0">@products[i].ProductName</h5>
                             <hr />
                             <div class="d-flex justify-content-between align-items-center">
                                 <p class="mb-0 font-weight-bold">$@products[i].Price</p>
-                                <ul class="list-unstyled list-inline">
+                                <ul class="list-unstyled list-inline my-0">
                                     @for (int j = 0; j < products[i].Rating / 2; j++)
                                     {
                                         <li class="list-inline-item mx-0"><i class="fas fa-star"></i></li>

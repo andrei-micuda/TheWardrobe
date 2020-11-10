@@ -177,6 +177,10 @@ nav .dropdown-toggle::after {
     vertical-align: inherit;
 }
 
+.border-input {
+    border: 1px solid #ced4da !important;
+}
+
 .product-detail {
     min-height: 550px;
 }
