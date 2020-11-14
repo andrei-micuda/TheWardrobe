@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "New";
+}
+
+@model TheWardrobe.Models.Product
+
+@Html.Partial("_ProductEdit", Model)
+
+@section scripts
+{
+    <script src="~/Scripts/EditProductInitializeInputSpinner.js"></script>
+}

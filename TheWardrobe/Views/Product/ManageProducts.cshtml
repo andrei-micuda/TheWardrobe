@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "ManageProducts";
+}
+
+<main class="col-md-10 mx-auto">
+    <div>
+        <a class="bg-transparent dropdown-toggle" data-toggle="collapse" data-target="#pending-products" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
+            Pending Products
+        </a>
+
+        <a class="btn btn-outline-success btn-sm float-right" href="/Product/New">New Product</a>
+    </div>
+    <br /><br />
+    <div id="pending-products" class="show">
+        @foreach (var product in ViewBag.PendingProducts)
+        {
+            <article class="card card-body mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <figure class="d-flex my-0">
+                            <div class="aside mr-3"><img src="@product.ImageUrl" class="border img-sm"></div>
+                            <figcaption class="info">
+                                <small class="text-muted">@product.Category.CategoryName</small>
+                                <br />
+                                <a href="/Product/Show?productId=@product.ProductId" class="title link-unstyled">@product.ProductName</a>
+                            </figcaption>
+                        </figure>
+                    </div> <!-- col.// -->
+                    <div class="col">
+                        <div class="float-right">
+                            <a class="btn btn-outline-success" href="/Product/Approve?productId=@product.ProductId">Approve</a>
+                            <a class="btn btn-outline-danger" href="/Product/Delete?productId=@product.ProductId">Revoke</a>
+                        </div>
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+            </article> <!-- card .// -->
+        }
+    </div>
+    <a class="bg-transparent dropdown-toggle" data-toggle="collapse" data-target="#approved-products" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
+        Approved Products
+    </a><br /><br />
+    <div id="approved-products" class="show">
+        @foreach (var product in ViewBag.ApprovedProducts)
+        {
+            <article class="card card-body mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <figure class="d-flex my-0">
+                            <div class="aside mr-3"><img src="@product.ImageUrl" class="border img-sm"></div>
+                            <figcaption class="info">
+                                <small class="text-muted">@product.Category.CategoryName</small>
+                                <br />
+                                <a href="/Product/Show?productId=@product.ProductId" class="title link-unstyled">@product.ProductName</a>
+                            </figcaption>
+                        </figure>
+                    </div> <!-- col.// -->
+                    <div class="col">
+                        <div class="float-right">
+                            <a class="btn btn-outline-secondary" href="/Product/Edit?productId=@product.ProductId">Edit</a>
+                            <a class="btn btn-outline-danger" href="/Product/Delete?productId=@product.ProductId">Delete</a>
+                        </div>
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+            </article> <!-- card .// -->
+        }
+    </div>
+</main>
