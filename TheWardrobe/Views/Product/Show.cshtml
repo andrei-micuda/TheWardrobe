@@ -38,20 +38,8 @@
             </h2>
 
             <div class="rating-wrap my-3">
-                <ul class="list-unstyled list-inline">
-                    @for (int j = 0; j < ViewBag.Product.Rating / 2; j++)
-                    {
-                        <li class="list-inline-item mx-0"><i class="fas fa-star"></i></li>
-                    }
-                    @if (ViewBag.Product.Rating % 2 != 0)
-                    {
-                        <li class="list-inline-item mx-0"><i class="fas fa-star-half-alt"></i></li>
-                    }
-                    @for (int j = 0; j < (10 - ViewBag.Product.Rating) / 2; j++)
-                    {
-                        <li class="list-inline-item mx-0"><i class="far fa-star"></i></li>
-                    }
-                </ul>
+                @Html.Partial("_ProductRating", (int)ViewBag.Product.Rating)
+
                 <small class="label-rating text-muted">132 reviews</small>
                 <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 154 orders </small>
             </div> <!-- rating-wrap.// -->
@@ -101,4 +89,36 @@
             <a href="#" class="btn  btn-outline-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
         </article> <!-- product-info-aside .// -->
     </main> <!-- col.// -->
+</div>
+
+<div class="row mt-5">
+    <div class="col-6 mx-auto d-flex justify-content-around row">
+        <div class="card text-center">
+            <div class="card-body">
+                <span class="product-rating font-weight-bold" style="font-size: 2rem">4.6</span><span class="text-muted">/5</span>
+                <div>
+                    @Html.Partial("_ProductRating", (int)ViewBag.Product.Rating)
+                </div>
+                <div class="rating-text"><span>46 ratings & 15 reviews</span> </div>
+            </div>
+        </div>
+
+        <div>
+            <h4>Rating breakdown</h4>
+            <ul class="list-unstyled">
+                @for (int i = 5; i >= 1; i--)
+                {
+                    <li class="d-flex justify-content-between align-items-center mb-1">
+                        <div class="d-inline"><span class="d-inline-block mr-1 text-center" style="min-width: 10px;">@i</span><i class="fas fa-star" style="position: relative; top: -2px; font-size: 0.9rem"></i></div>
+
+                        <div class="d-inline-flex progress mr-1" style="width: 70%">
+                            <div class="progress-bar" role="progressbar" style="width: @(i*100/5)%" aria-valuenow="@(i*100/5)" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <span>5</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 </div>
