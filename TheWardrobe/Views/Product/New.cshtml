@@ -4,87 +4,9 @@
 
 @model TheWardrobe.Models.Product
 
-<form action="/Product/New" method="post" id="productForm">
-    <div class="form-group">
-        <label for="ProductName">Product Name</label>
-        <input class="form-control" type="text" name="ProductName" id="ProductName" />
-    </div>
-
-    <div class="form-group">
-        <label for="Description">Description</label>
-        <textarea class="form-control" id="Description" name="Description" rows="3"></textarea>
-    </div>
-
-    <div class="row">
-        <div class="form-group col -6">
-            <label for="Category">Category</label>
-            <select class="selectpicker"
-                    id="Category"
-                    name="CategoryId"
-                    data-live-search="true"
-                    data-size="5"
-                    data-width="100%"
-                    data-style="bg-transparent border-input form-control">
-                @foreach (var cat in ViewBag.Categories)
-                {
-                    <option value="@cat.CategoryId">@cat.CategoryName</option>
-                }
-            </select>
-        </div>
-
-        <div class="form-group col-6">
-            <label for="Price">Price</label>
-            <input id="Price" name="Price" type="number" value="1" min="1" max="2000" step="1" />
-        </div>
-
-        <div class="form-group col-6">
-            <label for="SizeArray">Sizes</label>
-            <select class="selectpicker"
-                    id="SizeArray"
-                    name="SizeArray"
-                    multiple
-                    data-live-search="true"
-                    data-selected-text-format="count > 4"
-                    data-size="5"
-                    data-width="100%"
-                    data-style="bg-transparent border-input form-control">
-                <option>S</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
-            </select>
-            <input type="text" name="Size" id="Size" hidden />
-        </div>
-
-        <div class="form-group col-6">
-            <label for="Quantity">Quantity</label>
-            <input id="Quantity" name="Quantity" type="number" value="1" min="1" max="100" step="1" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="ImageUrl">Image URL</label>
-        <input class="form-control" type="text" name="ImageUrl" id="ImageUrl" />
-    </div>
-
-    <button class="btn btn-success w-100" type="submit">Add New Product</button>
-</form>
+@Html.Partial("_ProductEdit", Model)
 
 @section scripts
 {
-    <script>
-        $(document).ready(function () {
-            $('#productForm').submit(function (event) {
-                var form = $('#productForm');
-                event.preventDefault();
-                var sizesString = $('#productForm').serializeArray().filter(obj => obj.name == "SizeArray").map(obj => obj.value).join(" ");
-
-                $('#productForm #Size').val(sizesString);
-                form.off("submit");
-                form.submit();
-
-                return true;
-            });
-        });
-    </script>
+    <script src="~/Scripts/EditProductInitializeInputSpinner.js"></script>
 }
