@@ -91,34 +91,67 @@
     </main> <!-- col.// -->
 </div>
 
-<div class="row mt-5">
-    <div class="col-6 mx-auto d-flex justify-content-around row">
-        <div class="card text-center">
-            <div class="card-body">
-                <span class="product-rating font-weight-bold" style="font-size: 2rem">4.6</span><span class="text-muted">/5</span>
-                <div>
-                    @Html.Partial("_ProductRating", (int)ViewBag.Product.Rating)
-                </div>
-                <div class="rating-text"><span>46 ratings & 15 reviews</span> </div>
+<div class="row mt-5 justify-content-between">
+    <div class="col-6 d-flex flex-column justify-content-around row">
+        <div class="text-center mb-4">
+            <span class="product-rating font-weight-bold" style="font-size: 2rem">4.6</span><span class="text-muted">/5</span>
+            <div>
+                @Html.Partial("_ProductRating", (int)ViewBag.Product.Rating)
             </div>
+            <div class="rating-text"><span>46 ratings & 15 reviews</span> </div>
         </div>
 
-        <div>
-            <h4>Rating breakdown</h4>
+        <div class="w-75 mx-auto">
+            <h5>Rating breakdown</h5>
             <ul class="list-unstyled">
                 @for (int i = 5; i >= 1; i--)
                 {
                     <li class="d-flex justify-content-between align-items-center mb-1">
-                        <div class="d-inline"><span class="d-inline-block mr-1 text-center" style="min-width: 10px;">@i</span><i class="fas fa-star" style="position: relative; top: -2px; font-size: 0.9rem"></i></div>
+                        <span class="d-inline-block mr-1 text-center" style="min-width: 10px;">@i</span>
 
                         <div class="d-inline-flex progress mr-1" style="width: 70%">
-                            <div class="progress-bar" role="progressbar" style="width: @(i*100/5)%" aria-valuenow="@(i*100/5)" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: @(i*100/5)%; background: orange;" aria-valuenow="@(i*100/5)" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
 
-                        <span>5</span>
+                        <span class="text-muted">(5)</span>
                     </li>
                 }
             </ul>
         </div>
+    </div>
+
+    <div class="col-6 card">
+        <form class="card-body">
+            <h4>My Review</h4>
+            <div class="form-group my-2">
+                <label for="ReviewRating" hidden>Rating</label>
+                <input id="ReviewRating"
+                       name="ReviewRating"
+                       type="hidden"
+                       class="rating"
+                       data-filled="fas fa-star review-rating"
+                       data-empty="far fa-star review-rating"
+                       data-fractions="2" />
+            </div>
+
+            <div class="form-group input-group-sm">
+                <label for="ReviewTitle">Title</label>
+                <input type="text" id="ReviewTitle" name="ReviewTitle" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="ReviewBody">Details</label>
+                <textarea id="ReviewBody" name="ReviewReviewBody" class="form-control" rows="2"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-outline-success">Save changes <i class="far fa-edit"></i></button>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-10">
+        <h5 class="my-3">Other Reviews</h5>
+        <!-- TODO -->
     </div>
 </div>
