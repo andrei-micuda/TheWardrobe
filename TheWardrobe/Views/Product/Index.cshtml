@@ -20,20 +20,7 @@
                             <hr />
                             <div class="d-flex justify-content-between align-items-center">
                                 <p class="mb-0 font-weight-bold">$@products[i].Price</p>
-                                <ul class="list-unstyled list-inline my-0">
-                                    @for (int j = 0; j < products[i].Rating / 2; j++)
-                                    {
-                                        <li class="list-inline-item mx-0"><i class="fas fa-star"></i></li>
-                                    }
-                                    @if (products[i].Rating % 2 != 0)
-                                    {
-                                        <li class="list-inline-item mx-0"><i class="fas fa-star-half-alt"></i></li>
-                                    }
-                                    @for (int j = 0; j < (10 - products[i].Rating) / 2; j++)
-                                    {
-                                        <li class="list-inline-item mx-0"><i class="far fa-star"></i></li>
-                                    }
-                                </ul>
+                                @Html.Partial("_ProductRating", products[i].Rating)
                             </div>
                         </div>
                     </div>

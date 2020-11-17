@@ -23,7 +23,8 @@ namespace TheWardrobe
                       "~/Scripts/bootstrap.bundle.js",
                       "~/Scripts/bootstrap-input-spinner.js",
                       "~/Scripts/bootstrap-select.min.js",
-                      "~/Scripts/bootstrap-rating.js"));
+                      "~/Scripts/bootstrap-rating.js",
+                      "~/Scripts/pagination.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
