@@ -30,7 +30,8 @@ namespace TheWardrobe.Models
         [Required]
         public int Quantity { get; set; }
 
-        public int Rating { get; set; }
+        public double Rating { get; set; } // 0.5, 1.0, .., 4.5, 5 => fractional rating
+
         public string ImageUrl { get; set; }
         public int? UserId { get; set; }
         public int? CategoryId { get; set; }

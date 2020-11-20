@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TheWardrobe.Models;
+using TheWardrobe.ViewModels;
 
 //using Microsoft.AspNetCore.Mvc;
 
@@ -47,11 +48,21 @@ namespace TheWardrobe.Controllers
             return RedirectToAction("ManageProducts");
         }
 
-        public ActionResult Show(int productId)
+        public ActionResult Show(int? productId)
         {
+            if (productId == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var model = new ProductShow();
+
             var product = db.Products.Find(productId);
-            ViewBag.Product = product;
-            return View();
+            model.Product = product;
+
+            var reviews = db.Reviews.Where(r => r.ProductId == product.ProductId).ToList();
+            model.Reviews = reviews;
+            return View(model);
         }
 
         [NonAction]
@@ -125,6 +136,15 @@ namespace TheWardrobe.Controllers
             {
                 return View(productUpdated);
             }
+        }
+
+        public ActionResult UpdateRating(int productId)
+        {
+            var product = db.Products.Find(productId);
+
+            product.Rating = db.Reviews.Where(r => r.ProductId == productId).Average(r => r.Rating);
+
+            return RedirectToAction("Show", new { productId = productId });
         }
     }
 }

@@ -150,7 +150,7 @@ nav .dropdown-toggle::after {
         transform: scale(1.05);
     }
 
-.fa-star, .fa-star-half-alt {
+.fa-star, .fa-star-half-alt, .text-orange {
     color: orange;
 }
 
@@ -175,6 +175,10 @@ nav .dropdown-toggle::after {
     box-shadow: inherit;
     padding: inherit;
     vertical-align: inherit;
+}
+
+.hide {
+    display: none !important
 }
 
 .border-input {
@@ -213,4 +217,12 @@ nav .dropdown-toggle::after {
 .brand-style {
     font-family: 'PT Mono', monospace;
     color: #fff;
+}
+
+.review-rating {
+    font-size: 1.3rem;
+}
+
+.rating-small {
+    font-size: 0.9rem;
 }
