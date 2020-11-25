@@ -94,6 +94,17 @@
     </nav>
 
     <div class="container body-content">
+        @Html.ValidationSummary(false, "", new { @class = "alert alert-warning" })
+        @if (ViewBag.message != null)
+        {
+            <div class="@ViewBag.messageClasses alert-dismissible fade show mb-5" role="alert">
+                @ViewBag.message
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
         @RenderBody()
         <hr />
         <footer>

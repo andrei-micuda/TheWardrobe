@@ -87,24 +87,14 @@
                         data-style="bg-transparent border-input form-control">
                     @{
                         List<string> allSizes = new List<string>() { "S", "M", "L", "XL" };
-                        if (Model.ProductName != null)
+                        if (Model.Category != null && Model.Category.CategoryName == "Boots")
                         {
-                            if (Model.Category.CategoryName == "Boots")
-                            {
-                                allSizes = new List<string>() { "40", "41", "42", "43", "44" };
-                            }
-                            var productSizes = Model.Size.Split(' ');
-                            foreach (var size in allSizes)
-                            {
-                                <option @(productSizes.Contains(size) ? "selected" : "")>@size</option>
-                            }
+                            allSizes = new List<string>() { "40", "41", "42", "43", "44" };
                         }
-                        else
+                        var productSizes = (Model.Size != null) ? Model.Size.Split(' ') : new string[0];
+                        foreach (var size in allSizes)
                         {
-                            foreach (var size in allSizes)
-                            {
-                                <option>@size</option>
-                            }
+                            <option @(productSizes.Contains(size) ? "selected" : "")>@size</option>
                         }
                     }
                 </select>
