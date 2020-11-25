@@ -11,7 +11,8 @@ namespace TheWardrobe.Models
         [Key]
         public int CategoryId { get; set; }
         [Required]
-        public int CategoryName { get; set; }
+        public string CategoryName { get; set; }
+        public string Photo { get; set; }
         public int? UserId { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
