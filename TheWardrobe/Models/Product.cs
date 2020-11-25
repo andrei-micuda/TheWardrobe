@@ -12,27 +12,33 @@ namespace TheWardrobe.Models
         [Key]
         public int ProductId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The product name is required!")]
+        [StringLength(100, ErrorMessage = "The product name is too long!")]
         public string ProductName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The price name is required!")]
         public decimal Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The size is required!")]
         public string Size { get; set; }
 
         [Required]
         public bool IsApproved { get; set; }
 
+        [StringLength(1000, ErrorMessage = "The product description is too long!")]
         public string Description { get; set; }
+
         public DateTime DateAdded { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The quantity name is required!")]
         public int Quantity { get; set; }
 
+        [Range(0, 5, ErrorMessage = "The rating must be between 0 - 5!")]
         public double Rating { get; set; } // 0.5, 1.0, .., 4.5, 5 => fractional rating
 
+        [Url(ErrorMessage = "Image link is not a valid URL!")]
         public string ImageUrl { get; set; }
+
         public int? UserId { get; set; }
         public int? CategoryId { get; set; }
 

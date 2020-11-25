@@ -12,6 +12,7 @@ namespace TheWardrobe.Models
         public int ReviewId { get; set; }
 
         [Required]
+        [Range(0, 5, ErrorMessage = "The rating should have a value between 0 - 5!")]
         public int Rating { get; set; } // 1, .., 5
 
         public string RatingString
@@ -31,7 +32,8 @@ namespace TheWardrobe.Models
             }
         }
 
-        [Required]
+        [Required(ErrorMessage = "The review title is required!")]
+        [StringLength(100, ErrorMessage = "The review title is too long!")]
         public string ReviewTitle { get; set; }
 
         public string ReviewBody { get; set; }
