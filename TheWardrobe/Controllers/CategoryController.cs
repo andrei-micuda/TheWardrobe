@@ -48,12 +48,11 @@ namespace TheWardrobe.Controllers
         public ActionResult Edit(int id)
         {
             Category category = db.Categories.Find(id);
-            ViewBag.Category = category;
-            return View();
+            return View(category);
         }
 
         [HttpPut]
-        public ActionResult Edit(int id, Category requestCategory)
+        public ActionResult Edit([Bind(Exclude = "UserId")] int id, Category requestCategory)
         {
             try
             {
