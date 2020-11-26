@@ -37,7 +37,11 @@
                 default:
                     break;
             }" method="post" id="productForm" class="w-75 mx-auto card-body">
-        @*@Html.HttpMethodOverride(HttpVerbs.Put)*@
+
+        @if(actionName == "Edit")
+        {
+            @: @Html.HttpMethodOverride(HttpVerbs.Put)
+        }
 
         <!-- Prevent implicit submission of the form -->
         <button type="submit" disabled style="display: none" aria-hidden="true"></button>
