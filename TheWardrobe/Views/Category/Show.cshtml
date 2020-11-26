@@ -6,7 +6,7 @@
 <h1>@ViewBag.Category.CategoryName</h1>
 <p>@ViewBag.Category.CategoryId</p>
 <hr />
-<a href="/Student/Edit/@ViewBag.Category.CategoryId">Edit Category</a>
+<a href="/Category/Edit/@ViewBag.Category.CategoryId">Edit Category</a>
 
 <form action="/Category/Delete/@ViewBag.Category.CategoryId" method="post">
     @Html.HttpMethodOverride(HttpVerbs.Delete)
