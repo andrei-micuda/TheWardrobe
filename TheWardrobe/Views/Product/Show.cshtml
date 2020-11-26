@@ -139,7 +139,11 @@
                   @:/Review/Edit?reviewId=@userReview.ReviewId
               }
               ">
-                @Html.HttpMethodOverride(HttpVerbs.Put)
+                @if (userReview != null)
+                {
+                    @: @Html.HttpMethodOverride(HttpVerbs.Put)
+                }
+
                 <h4>My Review</h4>
                 <input type="text" name="ProductId" value="@Model.Product.ProductId" hidden />
 
