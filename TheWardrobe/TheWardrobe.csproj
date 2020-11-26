@@ -204,6 +204,7 @@
     <Content Include="Views\Shared\_ProductEdit.cshtml" />
     <Content Include="Views\Product\_ProductRating.cshtml" />
     <Content Include="Views\Review\_ReviewList.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\OrderItem\" />
