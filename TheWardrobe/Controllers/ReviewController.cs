@@ -1,4 +1,5 @@
 ﻿//using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace TheWardrobe.Controllers
                 if (ModelState.IsValid)
                 {
                     reviewToAdd.DateAdded = DateTime.Now;
+                    reviewToAdd.UserId = User.Identity.GetUserId();
                     if (TryUpdateModel(reviewToAdd))
                     {
                         db.Reviews.Add(reviewToAdd);

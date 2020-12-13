@@ -5,11 +5,11 @@ using Owin;
 using TheWardrobe.Models;
 
 [assembly: OwinStartupAttribute(typeof(TheWardrobe.Startup))]
+
 namespace TheWardrobe
 {
     public partial class Startup
     {
-
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
@@ -48,6 +48,16 @@ namespace TheWardrobe
                 var role = new IdentityRole();
                 role.Name = "Editor";
                 roleManager.Create(role);
+
+                var user = new ApplicationUser();
+                user.UserName = "editor@gmail.com";
+                user.Email = "editor@gmail.com";
+
+                var editorCreated = UserManager.Create(user, "!1Editor");
+                if (editorCreated.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, "Editor");
+                }
             }
 
             if (!roleManager.RoleExists("User"))
@@ -57,6 +67,5 @@ namespace TheWardrobe
                 roleManager.Create(role);
             }
         }
-
     }
 }

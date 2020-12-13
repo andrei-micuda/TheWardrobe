@@ -3,6 +3,8 @@
     var numberOfReviews = Model.Reviews.Count();
 }
 
+@using Microsoft.AspNet.Identity
+
 @model TheWardrobe.ViewModels.ProductShow
 
 <div class="row product-detail">
@@ -126,7 +128,7 @@
 
     <div class="col-6 card">
         @{
-            var userReview = Model.Reviews.Where(r => r.UserId == 14).SingleOrDefault(); // TODO check agains current user
+            var userReview = Model.Reviews.Where(r => r.UserId == User.Identity.GetUserId()).SingleOrDefault();
         }
         <div class="card-body">
             <form method="post" action="

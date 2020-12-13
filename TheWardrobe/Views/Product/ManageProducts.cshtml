@@ -2,6 +2,8 @@
     ViewBag.Title = "ManageProducts";
 }
 
+@using Microsoft.AspNet.Identity
+
 <main class="col-md-10 mx-auto">
     <div>
         <a class="bg-transparent dropdown-toggle" data-toggle="collapse" data-target="#pending-products" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
@@ -28,7 +30,10 @@
                     </div> <!-- col.// -->
                     <div class="col">
                         <div class="float-right">
-                            <a class="btn btn-outline-success" href="/Product/Approve?productId=@product.ProductId">Approve</a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a class="btn btn-outline-success" href="/Product/Approve?productId=@product.ProductId">Approve</a>
+                            }
                             <a class="btn btn-outline-danger" href="/Product/Delete?productId=@product.ProductId">Revoke</a>
                         </div>
                     </div> <!-- col.// -->

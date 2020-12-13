@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,6 +23,7 @@ namespace TheWardrobe.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult ManageProducts()
         {
             // Retireve action message if available
@@ -31,14 +33,22 @@ namespace TheWardrobe.Controllers
                 ViewBag.messageClasses = TempData["messageClasses"].ToString();
             }
 
-            //TODO Only retrieve items belonging to the current user
-            var pendingProducts = db.Products.Where(p => p.IsApproved == false).OrderByDescending(p => p.DateAdded).AsEnumerable().ToList();
+            var pendingProducts = db.Products.Where(p => p.IsApproved == false).OrderByDescending(p => p.DateAdded).ToList();
+            if (User.IsInRole("Editor"))
+            {
+                pendingProducts = pendingProducts.Where(p => p.UserId == User.Identity.GetUserId()).ToList();
+            }
             var approvedProducts = db.Products.Where(p => p.IsApproved == true).OrderByDescending(p => p.DateAdded).AsEnumerable().ToList();
+            if (User.IsInRole("Editor"))
+            {
+                approvedProducts = approvedProducts.Where(p => p.UserId == User.Identity.GetUserId()).ToList();
+            }
             ViewBag.PendingProducts = pendingProducts;
             ViewBag.ApprovedProducts = approvedProducts;
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Approve(int productId)
         {
             var productToUpdate = db.Products.Find(productId);
@@ -49,13 +59,23 @@ namespace TheWardrobe.Controllers
             return RedirectToAction("ManageProducts");
         }
 
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult Delete(int productId)
         {
+            var currentUser = User.Identity.GetUserId();
             var productToDelete = db.Products.Find(productId);
-            db.Products.Remove(productToDelete);
-            db.SaveChanges();
-            TempData["message"] = "The product has been succesfully deleted!";
-            TempData["messageClasses"] = "alert alert-danger";
+            if (currentUser == productToDelete.UserId || User.IsInRole("Admin"))
+            {
+                db.Products.Remove(productToDelete);
+                db.SaveChanges();
+                TempData["message"] = "The product has been succesfully deleted!";
+                TempData["messageClasses"] = "alert alert-danger";
+            }
+            else
+            {
+                TempData["message"] = "You don't have the right to delete that product!";
+                TempData["messageClasses"] = "alert alert-warning";
+            }
             return RedirectToAction("ManageProducts");
         }
 
@@ -111,6 +131,7 @@ namespace TheWardrobe.Controllers
             return selectList;
         }
 
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult New()
         {
             var product = new Product();
@@ -121,6 +142,7 @@ namespace TheWardrobe.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult New(Product productToAdd)
         {
             try
@@ -129,6 +151,7 @@ namespace TheWardrobe.Controllers
                 {
                     productToAdd.DateAdded = DateTime.Now;
                     productToAdd.IsApproved = false;
+                    productToAdd.UserId = User.Identity.GetUserId();
 
                     if (TryUpdateModel(productToAdd))
                     {
@@ -158,16 +181,25 @@ namespace TheWardrobe.Controllers
             }
         }
 
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult Edit(int productId)
         {
             var product = db.Products.Find(productId);
-            var categories = from cat in db.Categories
-                             select cat;
-            ViewBag.Categories = categories;
-            return View(product);
+            if (User.Identity.GetUserId() == product.UserId || User.IsInRole("Admin"))
+            {
+                var categories = from cat in db.Categories
+                                 select cat;
+                ViewBag.Categories = categories;
+                return View(product);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPut]
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult Edit(int productId, Product productUpdated)
         {
             try
@@ -210,11 +242,14 @@ namespace TheWardrobe.Controllers
             }
         }
 
+        [Authorize(Roles = "Editor,Admin,User")]
         public ActionResult UpdateRating(int productId)
         {
             var product = db.Products.Find(productId);
 
             product.Rating = db.Reviews.Where(r => r.ProductId == productId).Select(r => r.Rating).DefaultIfEmpty(0).Average();
+
+            db.SaveChanges();
 
             return RedirectToAction("Show", new { productId = productId });
         }
