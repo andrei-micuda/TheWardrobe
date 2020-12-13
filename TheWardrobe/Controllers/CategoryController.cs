@@ -1,4 +1,5 @@
 ﻿//using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,17 +32,18 @@ namespace TheWardrobe.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Editor,Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult New()
         {
             return View();
         }
         [HttpPost]
-        [Authorize(Roles = "Editor,Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult New(Category category)
         {
             try
             {
+                category.UserId = User.Identity.GetUserId();
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -52,7 +54,7 @@ namespace TheWardrobe.Controllers
             }
         }
 
-        [Authorize(Roles = "Editor,Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             Category category = db.Categories.Find(id);
@@ -60,7 +62,7 @@ namespace TheWardrobe.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Editor,Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Exclude = "UserId")] int id, Category requestCategory)
         {
             try
@@ -80,7 +82,7 @@ namespace TheWardrobe.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Editor,Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             Category category = db.Categories.Find(id);

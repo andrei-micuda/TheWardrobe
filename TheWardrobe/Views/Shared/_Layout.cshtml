@@ -58,11 +58,23 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Manage account</a>
-                        <a class="dropdown-item" href="#">Manage categories</a>
-                        <a class="dropdown-item" href="/Product/ManageProducts">Manage products</a>
-                        <a class="dropdown-item" href="#">Manage user roles</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a class="dropdown-item" href="/Category/Index">Manage          categories</a>
+                        }
+                        @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                        {
+                            <a class="dropdown-item" href="/Product/            ManageProducts">Manage products</a>
+                         }
+
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a class="dropdown-item" href="#">Manage user roles</a>
+                        }
+
                         <div class="dropdown-divider"></div>
-                        @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                        @if (User.Identity.IsAuthenticated)
                         {
                             <form action="/Account/LogOff"
                                   method="post"

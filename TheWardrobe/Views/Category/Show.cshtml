@@ -4,8 +4,8 @@
 }
 
 <h1>@ViewBag.Category.CategoryName</h1>
-<p>@ViewBag.Category.CategoryId</p>
 <hr />
+<img src="@ViewBag.Category.Photo" alt="Category picture" />
 <a href="/Category/Edit/@ViewBag.Category.CategoryId">Edit Category</a>
 
 <form action="/Category/Delete/@ViewBag.Category.CategoryId" method="post">
