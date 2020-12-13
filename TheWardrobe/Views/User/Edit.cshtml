@@ -1,0 +1,11 @@
+﻿@model TheWardrobe.Models.Category
+
+<form method="post" action="/User/Edit/@Model.UserId">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.Label("LastName", "Last Name: ")
+    @Html.Editor("LastName")
+    <br>
+    @Html.Label("FirstName", "First Name:")
+    @Html.Editor("FirstName")
+    <button type="submit">Save Changes</button>
+</form>

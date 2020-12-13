@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@foreach (var user in ViewBag.Users)
+{
+    <p>@user.LastName @user.FirstName</p>
+    <a href="/User/Show/@user.UserId">Show user informations</a>
+    <br />
+    <br />
+}
+

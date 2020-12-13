@@ -20,11 +20,11 @@ namespace TheWardrobe
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.bundle.js",
-                      "~/Scripts/bootstrap-input-spinner.js",
-                      "~/Scripts/bootstrap-select.min.js",
-                      "~/Scripts/bootstrap-rating.js",
-                      "~/Scripts/pagination.js"));
+                        "~/Scripts/bootstrap.bundle.js",
+                        "~/Scripts/bootstrap-input-spinner.js",
+                        "~/Scripts/bootstrap-select.min.js",
+                        "~/Scripts/bootstrap-rating.js",
+                        "~/Scripts/pagination.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

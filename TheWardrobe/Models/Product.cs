@@ -44,5 +44,6 @@ namespace TheWardrobe.Models
 
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual Category Category { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

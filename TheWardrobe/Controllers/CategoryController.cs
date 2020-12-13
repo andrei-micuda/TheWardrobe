@@ -8,9 +8,12 @@ using TheWardrobe.Models;
 
 namespace TheWardrobe.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
-        private AppDBContext db = new AppDBContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        [Authorize(Roles = "User,Editor,Admin")]
         public ActionResult Index()
         {
             var categories = from category in db.Categories
@@ -19,6 +22,8 @@ namespace TheWardrobe.Controllers
             ViewBag.Categories = categories;
             return View();
         }
+
+        [Authorize(Roles = "User,Editor,Admin")]
         public ActionResult Show(int id)
         {
             Category category = db.Categories.Find(id);
@@ -26,11 +31,13 @@ namespace TheWardrobe.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult New()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult New(Category category)
         {
             try
@@ -45,6 +52,7 @@ namespace TheWardrobe.Controllers
             }
         }
 
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult Edit(int id)
         {
             Category category = db.Categories.Find(id);
@@ -52,6 +60,7 @@ namespace TheWardrobe.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult Edit([Bind(Exclude = "UserId")] int id, Category requestCategory)
         {
             try
@@ -69,7 +78,9 @@ namespace TheWardrobe.Controllers
                 return View();
             }
         }
+
         [HttpDelete]
+        [Authorize(Roles = "Editor,Admin")]
         public ActionResult Delete(int id)
         {
             Category category = db.Categories.Find(id);

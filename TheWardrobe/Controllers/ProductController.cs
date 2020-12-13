@@ -12,7 +12,7 @@ namespace TheWardrobe.Controllers
 {
     public class ProductController : Controller
     {
-        private AppDBContext db = new AppDBContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Product
         public ActionResult Index()

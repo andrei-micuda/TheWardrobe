@@ -10,7 +10,7 @@ namespace TheWardrobe.Controllers
 {
     public class ReviewController : Controller
     {
-        private AppDBContext db = new AppDBContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpPost]
         public ActionResult New(Review reviewToAdd)
