@@ -13,7 +13,7 @@ namespace TheWardrobe.Models
         [Required]
         public string CategoryName { get; set; }
         public string Photo { get; set; }
-        public int? UserId { get; set; }
+        public string UserId { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ApplicationUser User { get; set; }
     }
