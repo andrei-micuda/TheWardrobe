@@ -177,6 +177,10 @@ nav .dropdown-toggle::after {
     vertical-align: inherit;
 }
 
+.btn-link {
+    cursor: pointer;
+}
+
 .hide {
     display: none !important
 }

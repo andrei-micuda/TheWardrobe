@@ -64,14 +64,18 @@
                         <div class="dropdown-divider"></div>
                         @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                         {
-                            <a class="dropdown-item" href="/account/logoff">Log off</a>
+                            <form action="/Account/LogOff"
+                                  method="post"
+                                  class="form-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn-link dropdown-item">Log out</button>
+                            </form>
                         }
                         else
                         {
                             <a class="dropdown-item" href="/account/login">Log in</a>
                             <a class="dropdown-item" href="/account/register">Register</a>
                         }
-
                     </div>
                 </li>
 
