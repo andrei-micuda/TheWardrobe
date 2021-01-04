@@ -22,7 +22,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto main-nav">
+            <ul class="navbar-nav main-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="/Product/Index">
                         <i class="fa fa-home"></i>
@@ -30,30 +30,32 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item dropdown mr-5">
+                <li class="nav-item dropdown">
                     @*<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fas fa-tshirt"></i>
-                        <span>Categories</span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Tshirts</a>
-                        <a class="dropdown-item" href="#">Pants</a>
-                        <a class="dropdown-item" href="#">Accessories</a>
-                    </div>*@
-                    <a href="/Category/Index" class="nav-link aria-haspopup="true" aria-expanded="false"">
+                            <i class="fa fas fa-tshirt"></i>
+                            <span>Categories</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Tshirts</a>
+                            <a class="dropdown-item" href="#">Pants</a>
+                            <a class="dropdown-item" href="#">Accessories</a>
+                        </div>*@
+                    <a href="/Category/Index" class="nav-link aria-haspopup=" true" aria-expanded="false" ">
                         <i class="fa fas fa-tshirt"></i>
                         <span>Categories</span>
                     </a>
                 </li>
-                <form class="form-inline">
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="width: 600px;">
-                        <div class="input-group-append">
-                            <button class="btn bg-white" type="submit"><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-                </form>
             </ul>
+
+            <form class="form-inline mx-auto" method="get" action="/Product/Index">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" style="width: 600px;" id="searchQuery" name="searchQuery">
+                    <div class="input-group-append">
+                        <button class="btn bg-white" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+
             <ul class="navbar-nav d-flex align-items-center">
                 <li class="nav-item dropdown mr-5">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -74,7 +76,6 @@
                         {
                             <a class="dropdown-item" href="/Product/ManageProducts">Manage products</a>
                         }
-
 
                         @if (User.IsInRole("Admin"))
                         {
@@ -103,26 +104,26 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    
-                        <a class="nav-link d-flex align-items-center nav-item btn bg-transparent d-flex align-items-center" href="/OrderProduct/Index">
-                            <i class="fa fa-shopping-cart my-0 mr-2"
-                               style="
+
+                    <a class="nav-link d-flex align-items-center nav-item btn bg-transparent d-flex align-items-center" href="/OrderProduct/Index">
+                        <i class="fa fa-shopping-cart my-0 mr-2"
+                           style="
                             font-size: 30px;
                             position: relative;
                             top: 3px;
                           ">
-                                <span class="badge badge-info">11</span>
-                            </i>
-                            <div class="d-flex flex-column">
-                                <small class="text-secondary text-left">My Cart</small>
-                                <span>$260.30</span>
-                            </div>
-                        </a>
+                            <span class="badge badge-info">11</span>
+                        </i>
+                        <div class="d-flex flex-column">
+                            <small class="text-secondary text-left">My Cart</small>
+                            <span>$260.30</span>
+                        </div>
+                    </a>
 
                     @*<div class="dropdown-menu" aria-labelledby="cartDropdownButton">
-                        <a class="dropdown-item" href="">See my cart</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                    </div>*@
+                            <a class="dropdown-item" href="">See my cart</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </div>*@
                 </li>
             </ul>
         </div>
@@ -155,5 +156,6 @@
             $("input[type='number']").inputSpinner();
         });
     </script>
+    <script>$.fn.selectpicker.Constructor.DEFAULTS.iconBase = 'far';</script>
 </body>
 </html>

@@ -150,6 +150,10 @@ nav .dropdown-toggle::after {
         transform: scale(1.05);
     }
 
+#filterForm .fa-star {
+    color: #343a40;
+}
+
 .fa-star, .fa-star-half-alt, .text-orange {
     color: orange;
 }

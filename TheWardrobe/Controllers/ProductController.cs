@@ -16,18 +16,47 @@ namespace TheWardrobe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Product
-        public ActionResult Index(int id = -1)
+        public ActionResult Index(string searchQuery, string sortCriteria, int id = -1)
         {
-            if(id != -1)
+            List<Product> products;
+            if (id != -1)
             {
-                var products = db.Products.Where(p => p.IsApproved == true && p.CategoryId == id).OrderByDescending(p => p.DateAdded).AsEnumerable().ToList();
-                ViewBag.Products = products;
+                products = db.Products.Where(p => p.IsApproved == true && p.CategoryId == id).OrderByDescending(p => p.DateAdded).AsEnumerable().ToList();
             }
             else
             {
-                var products = db.Products.Where(p => p.IsApproved == true).OrderByDescending(p => p.DateAdded).AsEnumerable().ToList();
-                ViewBag.Products = products;
+                products = db.Products.Where(p => p.IsApproved == true).OrderByDescending(p => p.DateAdded).AsEnumerable().ToList();
             }
+
+            if (searchQuery != null && searchQuery != "")
+            {
+                searchQuery = searchQuery.ToLower();
+                products = products.Where(p => p.ProductName.ToLower().Contains(searchQuery) || (p.Description != null && p.Description.ToLower().Contains(searchQuery)) || p.Category.CategoryName.ToLower().Contains(searchQuery)).ToList();
+            }
+
+            switch (sortCriteria)
+            {
+                case "priceAsc":
+                    products = products.OrderBy(p => p.Price).ToList();
+                    break;
+
+                case "priceDesc":
+                    products = products.OrderByDescending(p => p.Price).ToList();
+                    break;
+
+                case "ratingAsc":
+                    products = products.OrderBy(p => p.Rating).ToList();
+                    break;
+
+                case "ratingDesc":
+                    products = products.OrderByDescending(p => p.Rating).ToList();
+                    break;
+
+                default:
+                    break;
+            }
+
+            ViewBag.Products = products;
             return View();
         }
 

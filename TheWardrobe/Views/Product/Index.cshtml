@@ -5,6 +5,26 @@
 }
 
 <div class="row">
+    <form class="form-inline col-12 d-flex align-items-center" method="get" action="/Product/Index" id="filterForm">
+
+        <input type="text" name="searchQuery" value="@Context.Request.QueryString["searchQuery"]" hidden />
+
+        <label class="mr-4 my-0" for="sortCriteria">Filters:</label>
+
+        <select class="selectpicker mr-4" id="sortCriteria" name="sortCriteria">
+            <optgroup label="Price">
+                <option value="priceAsc">$ - Ascending</option>
+                <option value="priceDesc">$ - Descending</option>
+            </optgroup>
+
+            <optgroup label="Rating">
+                <option value="ratingAsc" data-icon="fa-star"> - Ascending</option>
+                <option value="ratingDesc" data-icon="fa-star"> - Descending</option>
+            </optgroup>
+        </select>
+
+        <button class="btn btn-outline-dark" type="submit">Filter</button>
+    </form>
     @{
         List<TheWardrobe.Models.Product> products = ViewBag.Products;
         for (int i = 0; i < products.Count(); i++)
@@ -17,13 +37,13 @@
                             <span class="badge badge-success position-absolute" style="top: 10px; left: 10px;"> NEW </span>
                         }
                         <img class="card-img-top @(products[i].Quantity == 0 ? "desaturate" : "")" src=@(products[i].ImageUrl ?? "/Content/product-placeholder.png") alt="Card image cap">
-                        @if(products[i].Quantity == 0)
+                        @if (products[i].Quantity == 0)
                         {
                             <div class="card-img-overlay position-absolute" style="height: 15%; top: 30%; background: #e3e7ea">
                                 <h1 class="text-center m-auto font-weight-bold text-white">Sold Out</h1>
                             </div>
                         }
-                        
+
                         <div class="card-body py-3 px-4">
                             <h5 class="card-title mb-0">@products[i].ProductName</h5>
                             <hr />

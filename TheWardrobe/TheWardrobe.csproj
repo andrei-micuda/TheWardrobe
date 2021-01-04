@@ -195,9 +195,9 @@
     <Compile Include="ViewModels\ProductShow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DefaultConnection.mdf" />
-    <Content Include="App_Data\DefaultConnection_log.ldf">
-      <DependentUpon>DefaultConnection.mdf</DependentUpon>
+    <Content Include="App_Data\TheWardrobe.mdf" />
+    <Content Include="App_Data\TheWardrobe_log.ldf">
+      <DependentUpon>TheWardrobe.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-rating.css" />
     <Content Include="Content\bootstrap-select.css" />
