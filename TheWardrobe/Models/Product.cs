@@ -38,11 +38,13 @@ namespace TheWardrobe.Models
 
         [Url(ErrorMessage = "Image link is not a valid URL!")]
         public string ImageUrl { get; set; }
+        public int NrOfOrders { get; set; } = 0;
 
         public string UserId { get; set; }
         public int? CategoryId { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
         public virtual Category Category { get; set; }
         public virtual ApplicationUser User { get; set; }
     }

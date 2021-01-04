@@ -1,5 +1,7 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@if (TempData.ContainsKey("message"))
+{
+    ViewBag.message = TempData["message"].ToString();
+    ViewBag.messageClasses = TempData["messageClasses"].ToString();
 }
 
 <div class="row">
@@ -8,13 +10,20 @@
         for (int i = 0; i < products.Count(); i++)
         {
             <div class="col-md-4 col-sm-6 mb-4">
-                <a class="link-unstyled" href="/Product/Show?productId=@products[i].ProductId">
+                <a class="link-unstyled" href=@(products[i].Quantity > 0 ? "/Product/Show?productId=" + @products[i].ProductId : "#")>
                     <div class="card card-product-grid px-0">
                         @if ((DateTime.Now - products[i].DateAdded).TotalHours <= 24)
                         {
                             <span class="badge badge-success position-absolute" style="top: 10px; left: 10px;"> NEW </span>
                         }
-                        <img class="card-img-top" src=@(products[i].ImageUrl ?? "/Content/product-placeholder.png") alt="Card image cap">
+                        <img class="card-img-top @(products[i].Quantity == 0 ? "desaturate" : "")" src=@(products[i].ImageUrl ?? "/Content/product-placeholder.png") alt="Card image cap">
+                        @if(products[i].Quantity == 0)
+                        {
+                            <div class="card-img-overlay position-absolute" style="height: 15%; top: 30%; background: #e3e7ea">
+                                <h1 class="text-center m-auto font-weight-bold text-white">Sold Out</h1>
+                            </div>
+                        }
+                        
                         <div class="card-body py-3 px-4">
                             <h5 class="card-title mb-0">@products[i].ProductName</h5>
                             <hr />

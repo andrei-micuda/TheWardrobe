@@ -9,19 +9,19 @@ using TheWardrobe.Models;
 
 namespace TheWardrobe.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        [Authorize(Roles = "User,Editor,Admin")]
         public ActionResult Index()
         {
-            var categories = from category in db.Categories
-                           orderby category.CategoryName
-                           select category;
+            var categories = (from category in db.Categories
+                             orderby category.CategoryName
+                             select category).AsEnumerable().ToList();
+
             ViewBag.Categories = categories;
             return View();
+
+            
         }
 
         [Authorize(Roles = "User,Editor,Admin")]
@@ -58,12 +58,13 @@ namespace TheWardrobe.Controllers
         public ActionResult Edit(int id)
         {
             Category category = db.Categories.Find(id);
+            ViewBag.Photo = category.Photo;
             return View(category);
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Exclude = "UserId")] int id, Category requestCategory)
+        public ActionResult Edit(int id, Category requestCategory)
         {
             try
             {
@@ -71,13 +72,15 @@ namespace TheWardrobe.Controllers
                 if (TryUpdateModel(category))
                 {
                     category.CategoryName = requestCategory.CategoryName;
+                    category.Photo = requestCategory.Photo;
+
                     db.SaveChanges();
                 }
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                return View();
+                return View(e);
             }
         }
 

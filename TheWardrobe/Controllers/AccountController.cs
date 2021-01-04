@@ -151,7 +151,7 @@ namespace TheWardrobe.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, ImgUrl = model.ImgUrl, PhoneNumber = model.PhoneNumber };
+                var user = new ApplicationUser { LastName = model.LastName, FirstName = model.FirstName, UserName = model.UserName, Email = model.Email, ImgUrl = model.ImgUrl, PhoneNumber = model.PhoneNumber };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

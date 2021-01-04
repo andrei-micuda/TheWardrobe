@@ -16,10 +16,18 @@ namespace TheWardrobe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(int id = -1)
         {
-            var products = db.Products.Where(p => p.IsApproved == true).OrderByDescending(p => p.DateAdded).AsEnumerable().ToList();
-            ViewBag.Products = products;
+            if(id != -1)
+            {
+                var products = db.Products.Where(p => p.IsApproved == true && p.CategoryId == id).OrderByDescending(p => p.DateAdded).AsEnumerable().ToList();
+                ViewBag.Products = products;
+            }
+            else
+            {
+                var products = db.Products.Where(p => p.IsApproved == true).OrderByDescending(p => p.DateAdded).AsEnumerable().ToList();
+                ViewBag.Products = products;
+            }
             return View();
         }
 

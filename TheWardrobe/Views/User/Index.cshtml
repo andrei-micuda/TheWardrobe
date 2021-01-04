@@ -3,11 +3,39 @@
     ViewBag.Title = "Index";
 }
 
-@foreach (var user in ViewBag.Users)
-{
-    <p>@user.LastName @user.FirstName</p>
-    <a href="/User/Show/@user.UserId">Show user informations</a>
-    <br />
-    <br />
-}
+<div class="show">
+    @foreach (var user in ViewBag.Users)
+    {
+        <article class="card card-body mb-3">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <figure class="d-flex my-0">
+                        <div class="aside mr-3"><a href="/User/Show/@user.Id" class="title link-unstyled"><img src= @(user.ImgUrl != null ? user.ImgUrl : "/Content/user-placeholder.png") class="border img-sm"></a></div>
+                        <figcaption class="info">
+
+
+                            <a href="/User/Show/@user.Id" class="title link-unstyled">@user.UserName</a>
+                            <br />
+                            <small class="text-muted">@user.Email</small>
+                            <br />
+                            <small class="text-muted">@user.PhoneNumber</small>
+                        </figcaption>
+                    </figure>
+                </div> <!-- col.// -->
+
+                <div class="col">
+                    <div class="float-right d-flex flex-row">
+                        <a class="btn btn-outline-secondary mr-2" href="/User/Edit/@user.Id">Edit</a>
+                        <form action="/User/Delete/@user.Id" method="post">
+                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                            <button class="btn btn-outline-danger" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div> <!-- col.// -->
+            </div> <!-- row.// -->
+
+        </article> <!-- card .// -->
+
+    }
+</div>
 

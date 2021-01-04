@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@if (TempData.ContainsKey("message"))
+{
+    ViewBag.message = TempData["message"].ToString();
+    ViewBag.messageClasses = TempData["messageClasses"].ToString();
+}
+@{
+    int total = 0;
+}
+
+    <div class="show">
+        @foreach (var product in ViewBag.OrderProducts)
+        {
+            <article class="card card-body mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <figure class="d-flex my-0">
+                            <div class="aside mr-3"><a href="/Product/Show?productId=@product.Product.ProductId" class="title link-unstyled"><img src="@product.Product.ImageUrl" class="border img-sm"></a></div>
+                            <figcaption class="info">
+
+
+                                <a href="/Product/Show?productId=@product.Product.ProductId" class="title link-unstyled">@product.Product.ProductName</a>
+                                <br />
+                                <small class="text-muted">Quantity: @product.Quantity</small>
+                                <br />
+                                <small class="text-muted">Size: @product.Size</small>
+                            </figcaption>
+                        </figure>
+                    </div> <!-- col.// -->
+
+                    <div class="col">
+                        <div class="float-right d-flex flex-row">
+                            @{
+                                var sum = product.Product.Price * product.Quantity;
+                                total += sum;
+                            }
+                            <h6 class="d-block m-auto text-info pl-5 pr-5">$@sum</h6>
+                            <form action="/OrderProduct/Delete/@product.OrderItemId" method="post">
+                                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button class="btn btn-outline-danger" type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+
+            </article> <!-- card .// -->
+
+        }
+        <hr />
+        @if (total != 0)
+        {
+            <article class="card card-body mb-3 border-0 d-flex flex-row">
+                <div class="w-50">
+                    <form action="/OrderProduct/Delete/-2" method="post">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button class="btn btn-outline-success" type="submit">Place Order</button>
+                    </form>
+                </div>
+                <div class="d-flex flex-row justify-content-end w-50">
+                    <h6 class="d-block mb-auto mt-auto text-info pl-5 pr-5">$@total.00</h6>
+                    <form action="/OrderProduct/Delete/-1" method="post">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button class="btn btn-outline-danger" type="submit">Empty cart</button>
+                    </form>
+                </div>
+            </article> <!-- card .// -->
+        }
+        else
+        {
+            <a href="/Product/Index" class="w-100 h-100 link-unstyled justify-content-center d-flex flex-column">
+
+                <img src="~/Content/empty_cart.png" alt="Empty Cart" class="w-25 h-25 m-auto" />
+
+                <h5 class="text-dark text-center">~ Your cart is empty ~</h5>
+
+            </a>
+
+        }
+
+
+    </div>
+

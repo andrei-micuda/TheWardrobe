@@ -27,6 +27,7 @@ namespace TheWardrobe
                         "~/Scripts/pagination.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/priority.css",
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-select.min.css",
                       "~/Content/bootstrap-rating.css",

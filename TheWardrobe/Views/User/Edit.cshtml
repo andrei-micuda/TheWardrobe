@@ -1,11 +1,72 @@
-﻿@model TheWardrobe.Models.Category
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
 
-<form method="post" action="/User/Edit/@Model.UserId">
+@model TheWardrobe.Models.ApplicationUser
+<form action="/User/Edit/@Model.Id" method="post">
     @Html.HttpMethodOverride(HttpVerbs.Put)
-    @Html.Label("LastName", "Last Name: ")
-    @Html.Editor("LastName")
-    <br>
-    @Html.Label("FirstName", "First Name:")
-    @Html.Editor("FirstName")
-    <button type="submit">Save Changes</button>
+    <div class="d-flex flex-row">
+
+        <div class="card px-0 g-light d-flex flex-column justify-content-center" style="box-sizing: border-box; overflow: hidden; cursor: pointer; width: 35%">
+            @if (Model.ImgUrl != null)
+            {
+                <img class="card-img-zoom card-img-top" src=@Model.ImgUrl alt="Category picture">
+            }
+            else
+            {
+                <img class="card-img-zoom card-img-top p-4" src="/Content/user-placeholder.png" alt="Category picture">
+            }
+        </div>
+
+        <div class="h-auto p-3 ml-5 position-relative" style="border-left: 1px solid rgba(0, 0, 0, 0.1); width: 65%">
+
+
+
+            <div class="h-75 d-flex flex-row">
+                <div class="w-50 px-3">
+                    <label for="UserName" class="text-muted d-block m-0"><small>User name</small></label>
+                    <input class="form-control mb-1" type="text" name="UserName" id="UserName" value="@Model.UserName" />
+
+                    <label for="FirstName" class="text-muted d-block m-0"><small>First name</small></label>
+                    <input class="form-control mb-1" type="text" name="FirstName" id="FirstName" value="@Model.FirstName" />
+
+                    <label for="LastName" class="text-muted d-block m-0"><small>Last name</small></label>
+                    <input class="form-control mb-1" type="text" name="LastName" id="LastName" value="@Model.LastName" />
+
+                    <label class="text-muted d-block m-0"><small>Role</small></label>
+                    @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text",
+        ViewBag.userRole), null, new { @class = "form-control" })
+
+                </div>
+                <div class="w-50 px-3">
+
+                    <label for="Email" class="text-muted d-block m-0"><small>Email</small></label>
+                    <input class="form-control mb-1" type="text" name="Email" id="Email" value="@Model.Email" />
+
+                    <label for="PhoneNumber" class="text-muted d-block m-0"><small>PhoneNumber</small></label>
+                    <input class="form-control mb-1" type="text" name="PhoneNumber" id="PhoneNumber" value="@Model.PhoneNumber" />
+
+                    <label for="ImgUrl" class="text-muted d-block m-0"><small>Image Url</small></label>
+                    <input class="form-control mb-1" type="text" name="ImgUrl" id="ImgUrl" value="@Model.ImgUrl" />
+                </div>
+                
+
+
+            </div>
+
+            <div class="h-auto w-100 p-4" style="bottom: 0;">
+                <button class="btn btn-outline-secondary w-100" type="submit" style="cursor:pointer">
+                    Sumbit changes
+                </button>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
 </form>
+

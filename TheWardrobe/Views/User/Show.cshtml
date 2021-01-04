@@ -1,7 +1,71 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Show";
 }
 
-<h2>Show</h2>
+
+@model TheWardrobe.Models.ApplicationUser
+
+<div class="d-flex flex-row">
+    <div class="card px-0 w-25 bg-light" style="box-sizing: border-box; overflow: hidden; cursor: pointer;">
+        @if (Model.ImgUrl != null)
+        {
+            <img class="card-img-zoom card-img-top" src=@Model.ImgUrl alt="Category picture">
+        }
+        else
+        {
+            <img class="card-img-zoom card-img-top p-4" src="/Content/user-placeholder.png" alt="Category picture">
+        }
+    </div>
+
+    <div class="w-75 h-auto p-3 ml-5 position-relative" style="border-left: 1px solid rgba(0, 0, 0, 0.1)">
+        <div class="h-75 d-flex flex-row">
+            <div class="w-50">
+                <small class="text-muted d-block">User name</small>
+                <h5 class="text-dark m-0 pb-3">@Model.UserName</h5>
+                
+                <small class="text-muted d-block">First name</small>
+                <h5 class="text-dark m-0 pb-3">@Model.FirstName</h5>
+
+                <small class="text-muted d-block">Last name</small>
+                <h5 class="text-dark m-0 pb-3">@Model.LastName</h5>
+            </div>
+            <div class="w-50">
+                <small class="text-muted d-block">Contact</small>
+                <h6 class="text-secondary m-0" style="cursor: pointer; text-decoration: underline">@Model.Email</h6>
+                @if (Model.PhoneNumber != null)
+                {
+                    <h6 class="text-secondary mt-1" style="cursor: pointer; text-decoration: underline">@Model.PhoneNumber</h6>
+                }
+                else
+                {
+                    <h6 class="text-black-50 m-0"> <small><i>Phone number not available</i></small></h6>
+                }
+
+            </div>
+            
+        </div>
+
+        <div class="d-flex flex-row h-auto w-50 position-absolute" style="bottom: 0;">
+            @*<a class="p-0 link-unstyled d-inline" href="/User/Index" style="width: 33%;cursor:default">
+                Go back
+            </a>*@
+            <a class="d-inline btn btn-outline-secondary px-3 py-1 w-auto mr-2" href="/User/Edit/@Model.Id" style="width: 33%;cursor:default">
+                Edit
+            </a>
+
+
+            <form action="/User/Delete/@Model.Id" method="post">
+                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button class="btn btn-outline-danger px-3 py-1" type="submit" style="cursor:pointer">
+                    Delete
+                </button>
+            </form>
+        </div>
+
+
+    </div>
+
+</div>
+
+
 

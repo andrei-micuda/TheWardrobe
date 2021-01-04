@@ -1,6 +1,6 @@
 ﻿@model TheWardrobe.Models.Category
 
-<form method="post" action="/Category/Edit/@Model.CategoryId">
+@*<form method="post" action="/Category/Edit/@Model.CategoryId">
     @Html.HttpMethodOverride(HttpVerbs.Put)
     @Html.Label("CategoryName", "Category Name: ")
     @Html.Editor("CategoryName")
@@ -8,4 +8,27 @@
     @Html.Label("Photo", "Photo url:")
     @Html.Editor("Photo")
     <button type="submit">Save Changes</button>
+</form>*@
+
+<form method="post" action="/Category/Edit/@Model.CategoryId">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <div class="d-flex flex-row">
+        <div class="card px-0 w-25 bg-light justify-content-center" style="box-sizing: border-box; overflow: hidden">
+            <img class="card-img-zoom card-img-top" src="@ViewBag.Photo" alt="Category picture">
+        </div>
+
+        <div class="w-75 p-3 d-flex flex-column mb-auto card ml-2 border-0">
+
+            <label for="CategoryName" class="text-muted d-block m-0"><small>Category Name</small></label>
+            <input class="form-control mb-1" type="text" name="CategoryName" id="CategoryName" value="@Model.CategoryName" />
+
+            <br />
+
+            <label for="Photo" class="text-muted d-block m-0"><small>Image Link</small></label>
+            <input class="form-control mb-1" type="text" name="Photo" id="Photo" value="@Model.Photo" />
+
+            <button class="btn btn-light m-3" type="submit">Save Changes</button>
+        </div>
+
+    </div>
 </form>

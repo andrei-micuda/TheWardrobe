@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -20,6 +21,9 @@ namespace TheWardrobe.Models
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
         public string ImgUrl { get; set; }
+        public string LastName {get;set;}
+        public string FirstName { get; set; }
+        public IEnumerable<SelectListItem> AllRoles { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -32,6 +36,8 @@ namespace TheWardrobe.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -24,14 +24,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto main-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/Product/Index">
                         <i class="fa fa-home"></i>
                         Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown mr-5">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @*<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fas fa-tshirt"></i>
                         <span>Categories</span>
                     </a>
@@ -39,7 +39,11 @@
                         <a class="dropdown-item" href="#">Tshirts</a>
                         <a class="dropdown-item" href="#">Pants</a>
                         <a class="dropdown-item" href="#">Accessories</a>
-                    </div>
+                    </div>*@
+                    <a href="/Category/Index" class="nav-link aria-haspopup="true" aria-expanded="false"">
+                        <i class="fa fas fa-tshirt"></i>
+                        <span>Categories</span>
+                    </a>
                 </li>
                 <form class="form-inline">
                     <div class="input-group">
@@ -57,23 +61,30 @@
                         <span>My Account</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Manage account</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="dropdown-item" href="#">Manage account</a>
+                        }
+
                         @if (User.IsInRole("Admin"))
                         {
                             <a class="dropdown-item" href="/Category/Index">Manage          categories</a>
                         }
                         @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
                         {
-                            <a class="dropdown-item" href="/Product/            ManageProducts">Manage products</a>
-                         }
+                            <a class="dropdown-item" href="/Product/ManageProducts">Manage products</a>
+                        }
 
 
                         @if (User.IsInRole("Admin"))
                         {
-                            <a class="dropdown-item" href="#">Manage user roles</a>
+                            <a class="dropdown-item" href="/User/Index">Manage user roles</a>
                         }
 
-                        <div class="dropdown-divider"></div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="dropdown-divider"></div>
+                        }
                         @if (User.Identity.IsAuthenticated)
                         {
                             <form action="/Account/LogOff"
@@ -92,8 +103,8 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <button class="nav-item btn bg-transparent dropdown-toggle d-flex align-items-center" type="button" id="cartDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a class="nav-link d-flex align-items-center" href="#">
+                    
+                        <a class="nav-link d-flex align-items-center nav-item btn bg-transparent d-flex align-items-center" href="/OrderProduct/Index">
                             <i class="fa fa-shopping-cart my-0 mr-2"
                                style="
                             font-size: 30px;
@@ -107,12 +118,11 @@
                                 <span>$260.30</span>
                             </div>
                         </a>
-                    </button>
 
-                    <div class="dropdown-menu" aria-labelledby="cartDropdownButton">
-                        <a class="dropdown-item" href="#">Action</a>
+                    @*<div class="dropdown-menu" aria-labelledby="cartDropdownButton">
+                        <a class="dropdown-item" href="">See my cart</a>
                         <a class="dropdown-item" href="#">Another action</a>
-                    </div>
+                    </div>*@
                 </li>
             </ul>
         </div>

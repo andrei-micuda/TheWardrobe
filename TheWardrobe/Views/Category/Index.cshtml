@@ -1,13 +1,67 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-@foreach (var category in ViewBag.Categories)
+<div class="row">
+    @{
+        List<TheWardrobe.Models.Category> categories = ViewBag.Categories;
+        for (int i = 0; i < categories.Count(); i++)
+        {
+        <div class="col-md-4 col-sm-6 mb-4">
+            @if (!User.IsInRole("Admin"))
+            {
+                <a class="link-unstyled" href="/Product/Index/@categories[i].CategoryId">
+                    <div class="category-hover card px-0 card-product-grid">
+                        <img class="blur card-img-top" src=@(categories[i].Photo) alt="Card image cap">
+                        <div class="card-img-overlay text-center d-flex flex-column justify-content-center p-0">
+                            <h2 class="bg-op03 box-shadow card-title mb-0">@categories[i].CategoryName</h2>
+                        </div>
+                    </div>
+                </a>
+            }
+            else
+            {
+                <div class="category-hover card px-0 btn p-0 card-product-grid position-relative">
+                    <img class="blur card-img-top" src=@(categories[i].Photo) alt="Card image cap">
+                    <div class="card-img-overlay text-center d-flex flex-column justify-content-center p-0">
+                        <div class="">
+                            <h2 class="bg-op03 box-shadow card-title mb-0">@categories[i].CategoryName</h2>
+                        </div>
+                    </div>
+
+                    <a href="/Category/Edit/@categories[i].CategoryId" class="edit-png png link-unstyled position-absolute">
+                        <div>
+                            <img src="~/Content/Edit.png" alt="Edit" />
+                        </div>
+                    </a>
+                    <a href="/Category/Delete/@categories[i].CategoryId" class="delete-png png link-unstyled position-absolute">
+                        <div>
+                            <img src="~/Content/Delete.png" alt="Edit" />
+                        </div>
+                    </a>
+                    <a href="/Category/Show/@categories[i].CategoryId" class="view-png png link-unstyled position-absolute">
+                        <div>
+                            <img src="~/Content/View.png" alt="Edit" />
+                        </div>
+                    </a>
+
+                </div>
+
+            }
+
+        </div>
+        }
+    }
+</div>
+
+
+
+
+@*@foreach (var category in ViewBag.Categories)
 {
     <p>@category.CategoryName</p>
     <a href="/Category/Show/@category.CategoryId">Show category informations</a>
     <br /><br />
 }
 
-<a href="/Category/New">Create new category</a>
+<a href="/Category/New">Create new category</a>*@
